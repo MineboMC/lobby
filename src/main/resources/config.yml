@@ -1,0 +1,21 @@
+welcome-message:
+  enabled: true
+  lines:
+    - "Welcome to Minebo!"
+
+scoreboard:
+  title: "&6&lThe Minebo Network"
+  lines:
+    - ""
+
+selector:
+  title: "Servers"
+  size: 27
+  queues:
+    MCRaidz:
+      name: MCRaidz
+      queue-id: MCRaidz
+      slot: 13
+      item: MUSHROOM_STEW
+      description:
+        - "Soup"
