@@ -6,7 +6,29 @@ welcome-message:
 scoreboard:
   title: "&6&lThe Minebo Network"
   lines:
-    - ""
+    - '&7&o&m--------------------&f'
+    - '&6Online:'
+    - '&f%players%'
+    - '&f'
+    - '&6Rank:'
+    - '&f%rank%'
+    - '&f'
+    - '&ewww.minebo.net'
+    - '&7&m--------------------'
+  queued-lines:
+    - '&7&o&m--------------------&r'
+    - '&6Online:'
+    - '&f%players%'
+    - '&f'
+    - '&6Rank:'
+    - '&r%rank%'
+    - '&f'
+    - '&cQueued for:'
+    - '&b%queue%'
+    - '&bPostion: &f#%place% of %total%'
+    - '&f'
+    - '&ewww.minebo.net'
+    - '&7&m--------------------'
 
 selector:
   title: "Servers"
