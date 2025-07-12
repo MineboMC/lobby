@@ -42,7 +42,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
     }
 
     public String replacePlaceholders(Player player, String line) {
-        return line.replace("%players%", NetworkUtil.INSTANCE.getPlayerCounts().getOrDefault("ALL", 0).toString())
+        return line.replace("%players%", getGlobalPlayerCount().toString())
                    .replace("%rank%", BasaltAPI.INSTANCE.getPlayerRankString(player.getUniqueId()));
     }
 
@@ -50,12 +50,22 @@ public class ScoreboardImpl extends ScoreboardProvider {
         String s = replacePlaceholders(player, line);
 
         if(queueModel != null) {
-            s = s.replace("%queue%", queueModel.getDisplayName())
-                 .replace("%place%", String.valueOf(queueModel.getPosition(player.getUniqueId()))
-                 .replace("%total%", String.valueOf(queueModel.getPlayersInQueue().size())));
+            s = s.replace("%queue%", queueModel.getDisplayName());
+            s = s.replace("%place%", String.valueOf(queueModel.getPosition(player.getUniqueId())));
+            s = s.replace("%total%", String.valueOf(queueModel.getPlayersInQueue().size()));
         }
 
         return s;
+    }
+
+    public Integer getGlobalPlayerCount() {
+        Integer onlinePlayers = 0;
+
+        for(Integer i : NetworkUtil.INSTANCE.getPlayerCounts().values()) {
+            onlinePlayers += i;
+        }
+
+        return onlinePlayers;
     }
 
 }
