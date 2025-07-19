@@ -6,6 +6,7 @@ import net.minebo.basalt.models.queue.QueueModel;
 import net.minebo.basalt.service.queue.QueueService;
 import net.minebo.basalt.util.NetworkUtil;
 import net.minebo.cobalt.scoreboard.provider.ScoreboardProvider;
+import net.minebo.cobalt.util.format.NumberFormatting;
 import net.minebo.lobby.Lobby;
 import org.bukkit.entity.Player;
 
@@ -42,7 +43,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
     }
 
     public String replacePlaceholders(Player player, String line) {
-        return line.replace("%players%", getGlobalPlayerCount().toString())
+        return line.replace("%players%", NumberFormatting.addCommas(getGlobalPlayerCount()))
                    .replace("%rank%", BasaltAPI.INSTANCE.getPlayerRankString(player.getUniqueId()));
     }
 
@@ -51,8 +52,8 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(queueModel != null) {
             s = s.replace("%queue%", queueModel.getDisplayName());
-            s = s.replace("%place%", String.valueOf(queueModel.getPosition(player.getUniqueId())));
-            s = s.replace("%total%", String.valueOf(queueModel.getPlayersInQueue().size()));
+            s = s.replace("%place%", NumberFormatting.addCommas(queueModel.getPosition(player.getUniqueId())));
+            s = s.replace("%total%", NumberFormatting.addCommas(queueModel.getPlayersInQueue().size()));
         }
 
         return s;

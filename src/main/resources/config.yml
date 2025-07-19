@@ -4,7 +4,7 @@ welcome-message:
     - "Welcome to Minebo!"
 
 scoreboard:
-  title: "&6&lThe Minebo Network"
+  title: "&6&lMINEBO"
   lines:
     - '&7&o&m--------------------&f'
     - '&6Online:'

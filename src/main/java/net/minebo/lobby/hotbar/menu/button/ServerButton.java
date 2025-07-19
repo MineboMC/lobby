@@ -61,7 +61,7 @@ public class ServerButton extends Button {
 
                 if(queue.containsPlayer(player.getUniqueId())) {
                     description.add("");
-                    description.add("&fYou are position #" + ChatColor.AQUA + queue.getPosition(player.getUniqueId()) + ChatColor.WHITE + " of " + ChatColor.AQUA + NumberFormatting.addCommas(queue.getPlayersInQueue().size()));
+                    description.add("&eYou are position #" + ChatColor.WHITE + queue.getPosition(player.getUniqueId()) + ChatColor.YELLOW + " of " + ChatColor.WHITE + NumberFormatting.addCommas(queue.getPlayersInQueue().size()) + ChatColor.YELLOW + "!");
                     description.add(ChatColor.RED + "Right click to leave queue!");
                 } else {
                     description.add("");
