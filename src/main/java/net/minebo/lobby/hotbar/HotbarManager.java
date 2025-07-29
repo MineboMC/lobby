@@ -12,6 +12,8 @@ public class HotbarManager {
 
     public static ItemStack SELECTOR = new ItemBuilder(Material.COMPASS).setName(ChatColor.YELLOW + "Server Selector").build();
 
+    public static ItemStack ENDER_BUTT = new ItemBuilder(Material.ENDER_PEARL).setName(ChatColor.LIGHT_PURPLE + "Ender Butt").build();
+
     public static void init() {
         Bukkit.getPluginManager().registerEvents(new HotbarListener(), Lobby.instance);
     }

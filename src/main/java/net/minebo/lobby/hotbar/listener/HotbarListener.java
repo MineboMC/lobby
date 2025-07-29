@@ -17,11 +17,16 @@ public class HotbarListener implements Listener {
         Player player = event.getPlayer();
 
         player.getInventory().setItem(0, HotbarManager.SELECTOR);
+        player.getInventory().setItem(7, HotbarManager.ENDER_BUTT);
     }
 
     @EventHandler
     public void onItemUse(PlayerInteractEvent e) {
         if((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getPlayer().getItemInHand() == null) {
+            return;
+        }
+
+        if(e.getItem() == null) {
             return;
         }
 

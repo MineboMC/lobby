@@ -3,6 +3,7 @@ package net.minebo.lobby.cobalt;
 import net.minebo.basalt.api.BasaltAPI;
 import net.minebo.basalt.models.profile.GameProfile;
 import net.minebo.basalt.models.queue.QueueModel;
+import net.minebo.basalt.models.ranks.Rank;
 import net.minebo.basalt.service.queue.QueueService;
 import net.minebo.basalt.util.NetworkUtil;
 import net.minebo.cobalt.scoreboard.provider.ScoreboardProvider;
@@ -31,24 +32,26 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(QueueService.INSTANCE.playerAlreadyQueued(player.getUniqueId()) != null) {
             Lobby.instance.getConfig().getStringList("scoreboard.queued-lines").forEach(line -> {
-                lines.add(replaceQueuePlaceholders(player, QueueService.INSTANCE.playerAlreadyQueued(player.getUniqueId()), line));
+                lines.add(replaceQueuePlaceholders(player, profile, QueueService.INSTANCE.playerAlreadyQueued(player.getUniqueId()), line));
             });
         } else {
             Lobby.instance.getConfig().getStringList("scoreboard.lines").forEach(line -> {
-                lines.add(replacePlaceholders(player, line));
+                lines.add(replacePlaceholders(player, profile, line));
             });
         }
 
         return lines;
     }
 
-    public String replacePlaceholders(Player player, String line) {
+    public String replacePlaceholders(Player player, GameProfile profile, String line) {
+        Rank rank = profile.getCurrentRank();
+
         return line.replace("%players%", NumberFormatting.addCommas(getGlobalPlayerCount()))
-                   .replace("%rank%", BasaltAPI.INSTANCE.getPlayerRankString(player.getUniqueId()));
+                   .replace("%rank%", rank.getColor() + rank.getDisplayName());
     }
 
-    public String replaceQueuePlaceholders(Player player, QueueModel queueModel, String line) {
-        String s = replacePlaceholders(player, line);
+    public String replaceQueuePlaceholders(Player player, GameProfile profile, QueueModel queueModel, String line) {
+        String s = replacePlaceholders(player, profile, line);
 
         if(queueModel != null) {
             s = s.replace("%queue%", queueModel.getDisplayName());

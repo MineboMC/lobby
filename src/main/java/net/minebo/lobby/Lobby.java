@@ -1,11 +1,12 @@
 package net.minebo.lobby;
 
-import lombok.Getter;
 import net.minebo.cobalt.menu.MenuHandler;
 import net.minebo.cobalt.scoreboard.ScoreboardHandler;
 import net.minebo.lobby.cobalt.ScoreboardImpl;
+import net.minebo.lobby.fun.FunManager;
 import net.minebo.lobby.hotbar.HotbarManager;
-import net.minebo.lobby.listener.GeneralListener;
+import net.minebo.lobby.listener.LobbyListener;
+import net.minebo.lobby.listener.PreventionListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,11 +25,13 @@ public class Lobby extends JavaPlugin {
         new ScoreboardHandler(new ScoreboardImpl(), this);
 
         HotbarManager.init();
+        FunManager.init();
 
     }
 
     public void registerListeners() {
-        Bukkit.getPluginManager().registerEvents(new GeneralListener(), this);
+        Bukkit.getPluginManager().registerEvents(new LobbyListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PreventionListener(), this);
     }
 
 }
