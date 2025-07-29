@@ -23,7 +23,7 @@ public class DoubleJumpListener implements Listener {
     @Getter
     private static Map<UUID, Boolean> allowSneakJump = new HashMap<>();
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler
     public void onToggleFlight(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if(player.getGameMode() == GameMode.CREATIVE)
@@ -44,7 +44,7 @@ public class DoubleJumpListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler
     public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
         final Player player = event.getPlayer();
         if (player.isOnGround() || player.getAllowFlight() || allowSneakJump.get(player.getUniqueId()) == null || !allowSneakJump.get(player.getUniqueId())) {
@@ -57,7 +57,7 @@ public class DoubleJumpListener implements Listener {
         allowSneakJump.put(player.getUniqueId(), false);
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) {
             return;
@@ -70,7 +70,7 @@ public class DoubleJumpListener implements Listener {
         allowSneakJump.put(player.getUniqueId(), true);
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         if (!event.getPlayer().isOnGround()) {
             return;

@@ -1,6 +1,7 @@
 package net.minebo.lobby.listener;
 
 import net.minebo.lobby.Lobby;
+import net.minebo.lobby.hotbar.HotbarManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -16,6 +17,12 @@ public class LobbyListener implements Listener {
         e.setJoinMessage(null);
 
         resetPlayer(e.getPlayer());
+
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            if(HotbarManager.hasPlayersHidden(player)) {
+                e.getPlayer().hidePlayer(player);
+            }
+        });
 
         for (Player players : Bukkit.getOnlinePlayers()) {
             players.showPlayer(players);

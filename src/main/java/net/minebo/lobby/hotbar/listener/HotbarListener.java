@@ -18,6 +18,7 @@ public class HotbarListener implements Listener {
 
         player.getInventory().setItem(0, HotbarManager.SELECTOR);
         player.getInventory().setItem(7, HotbarManager.ENDER_BUTT);
+        player.getInventory().setItem(8, HotbarManager.HIDE_PLAYERS);
     }
 
     @EventHandler
@@ -30,9 +31,7 @@ public class HotbarListener implements Listener {
             return;
         }
 
-        if(e.getItem().isSimilar(HotbarManager.SELECTOR)) {
-            new SelectorMenu(e.getPlayer()).openMenu(e.getPlayer());
-        }
+        HotbarManager.doInteraction(e.getPlayer(), e.getItem());
     }
 
 }
