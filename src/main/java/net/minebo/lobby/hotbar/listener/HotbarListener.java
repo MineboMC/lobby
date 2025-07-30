@@ -17,8 +17,8 @@ public class HotbarListener implements Listener {
         Player player = event.getPlayer();
 
         player.getInventory().setItem(0, HotbarManager.SELECTOR);
-        player.getInventory().setItem(7, HotbarManager.ENDER_BUTT);
-        player.getInventory().setItem(8, HotbarManager.HIDE_PLAYERS);
+        player.getInventory().setItem(7, HotbarManager.HIDE_PLAYERS);
+        player.getInventory().setItem(8, HotbarManager.ENDER_BUTT);
     }
 
     @EventHandler

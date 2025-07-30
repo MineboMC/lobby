@@ -4,7 +4,10 @@ import net.minebo.basalt.api.BasaltAPI;
 import net.minebo.basalt.models.profile.GameProfile;
 import net.minebo.basalt.models.queue.QueueModel;
 import net.minebo.basalt.models.ranks.Rank;
+import net.minebo.basalt.models.server.UniqueServer;
+import net.minebo.basalt.service.profiles.ProfileGameService;
 import net.minebo.basalt.service.queue.QueueService;
+import net.minebo.basalt.service.server.UniqueServerService;
 import net.minebo.basalt.util.NetworkUtil;
 import net.minebo.cobalt.scoreboard.provider.ScoreboardProvider;
 import net.minebo.cobalt.util.format.NumberFormatting;
@@ -28,22 +31,20 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         GameProfile profile = BasaltAPI.INSTANCE.syncFindProfile(player.getUniqueId());
 
-        NetworkUtil.INSTANCE.getPlayerCount("ALL");
-
         if(QueueService.INSTANCE.playerAlreadyQueued(player.getUniqueId()) != null) {
             Lobby.instance.getConfig().getStringList("scoreboard.queued-lines").forEach(line -> {
                 lines.add(replaceQueuePlaceholders(player, profile, QueueService.INSTANCE.playerAlreadyQueued(player.getUniqueId()), line));
             });
         } else {
             Lobby.instance.getConfig().getStringList("scoreboard.lines").forEach(line -> {
-                lines.add(replacePlaceholders(player, profile, line));
+                lines.add(replacePlaceholders(profile, line));
             });
         }
 
         return lines;
     }
 
-    public String replacePlaceholders(Player player, GameProfile profile, String line) {
+    public String replacePlaceholders(GameProfile profile, String line) {
         Rank rank = profile.getCurrentRank();
 
         return line.replace("%players%", NumberFormatting.addCommas(getGlobalPlayerCount()))
@@ -51,7 +52,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
     }
 
     public String replaceQueuePlaceholders(Player player, GameProfile profile, QueueModel queueModel, String line) {
-        String s = replacePlaceholders(player, profile, line);
+        String s = replacePlaceholders(profile, line);
 
         if(queueModel != null) {
             s = s.replace("%queue%", queueModel.getDisplayName());
@@ -63,10 +64,10 @@ public class ScoreboardImpl extends ScoreboardProvider {
     }
 
     public Integer getGlobalPlayerCount() {
-        Integer onlinePlayers = 0;
+        int onlinePlayers = 0;
 
-        for(Integer i : NetworkUtil.INSTANCE.getPlayerCounts().values()) {
-            onlinePlayers += i;
+        for (UniqueServer s : UniqueServerService.INSTANCE.getServers().values()) {
+            onlinePlayers += s.getPlayers().size();
         }
 
         return onlinePlayers;
