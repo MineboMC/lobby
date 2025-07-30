@@ -29,7 +29,7 @@ public class LobbyListener implements Listener {
         }
         if(Lobby.instance.getConfig().getBoolean("welcome-message.enabled")) {
             Lobby.instance.getConfig().getStringList("welcome-message.lines").forEach(m -> {
-                e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', m));
+                e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%player%", e.getPlayer().getDisplayName()));
             });
         }
 

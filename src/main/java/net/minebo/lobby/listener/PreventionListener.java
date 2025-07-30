@@ -45,7 +45,6 @@ public class PreventionListener implements Listener {
         event.setCancelled(true);
     }
 
-
     @EventHandler
     public void onPlayerPickupItem(PlayerPickupItemEvent event) {
         event.setCancelled(true);
