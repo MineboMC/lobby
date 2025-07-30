@@ -1,8 +1,10 @@
 package net.minebo.lobby.hotbar.listener;
 
+import net.minebo.cosmetics.cosmetics.CosmeticHandler;
 import net.minebo.lobby.hotbar.HotbarManager;
 import net.minebo.lobby.hotbar.menu.SelectorMenu;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +19,11 @@ public class HotbarListener implements Listener {
         Player player = event.getPlayer();
 
         player.getInventory().setItem(0, HotbarManager.SELECTOR);
+
+        if(Bukkit.getPluginManager().isPluginEnabled("Cosmetics")) {
+            player.getInventory().setItem(4, HotbarManager.COSMETICS);
+        }
+
         player.getInventory().setItem(7, HotbarManager.HIDE_PLAYERS);
         player.getInventory().setItem(8, HotbarManager.ENDER_BUTT);
     }

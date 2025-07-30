@@ -4,5 +4,6 @@ description: "The hub plugin for Minebo."
 authors: ["Ian Rich"]
 website: "https://github.com/MineboMC/Lobby"
 main: net.minebo.lobby.Lobby
+softdepend: ["Cosmetics"]
 depend: ["Basalt"]
 api-version: '1.20'
