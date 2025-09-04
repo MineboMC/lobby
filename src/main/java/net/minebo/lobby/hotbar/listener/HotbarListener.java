@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 public class HotbarListener implements Listener {
 
@@ -30,7 +31,11 @@ public class HotbarListener implements Listener {
 
     @EventHandler
     public void onItemUse(PlayerInteractEvent e) {
-        if((e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) && e.getPlayer().getItemInHand() == null) {
+        if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_BLOCK) {
+            return;
+        }
+
+        if(e.getHand() != EquipmentSlot.HAND) {
             return;
         }
 

@@ -1,5 +1,6 @@
 package net.minebo.lobby.listener;
 
+import net.minebo.basalt.api.BasaltAPI;
 import net.minebo.lobby.Lobby;
 import net.minebo.lobby.hotbar.HotbarManager;
 import org.bukkit.Bukkit;
@@ -29,7 +30,7 @@ public class LobbyListener implements Listener {
         }
         if(Lobby.instance.getConfig().getBoolean("welcome-message.enabled")) {
             Lobby.instance.getConfig().getStringList("welcome-message.lines").forEach(m -> {
-                e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%player%", e.getPlayer().getDisplayName()));
+                e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', m.replace("%player%", BasaltAPI.INSTANCE.findRank(e.getPlayer().getUniqueId()).getColor() + e.getPlayer().getName())));
             });
         }
 
