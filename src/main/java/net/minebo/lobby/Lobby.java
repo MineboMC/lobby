@@ -12,6 +12,8 @@ import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
+
 public class Lobby extends JavaPlugin {
 
     public static Lobby instance;
@@ -23,7 +25,7 @@ public class Lobby extends JavaPlugin {
 
         MenuHandler.init(this);
 
-        new ScoreboardHandler(new ScoreboardImpl(), this);
+        new ScoreboardHandler(List.of(new ScoreboardImpl()), this);
 
         World world = Bukkit.getWorld("world");
         world.setTime(1000);

@@ -43,17 +43,16 @@ public class ServerButton extends Button {
     public List<String> getDescription(Player player) {
 
         UniqueServer server = UniqueServerService.INSTANCE.byId(id);
+        List<String> description = new ArrayList<>(lore);
         QueueModel queue;
 
-        try {
-            queue = QueueService.INSTANCE.byId(server.getQueueName()).get();
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
-
-        List<String> description = new ArrayList<>(lore);
-
         if(server != null) {
+            try {
+                queue = QueueService.INSTANCE.byId(server.getQueueName()).get();
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+
             if (server.getOnline()) {
                 description.add("");
                 description.add("&fStatus: " + ChatColor.GREEN + "Online");

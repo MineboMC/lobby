@@ -20,12 +20,12 @@ import java.util.List;
 public class ScoreboardImpl extends ScoreboardProvider {
 
     @Override
-    public String getTitle(Player player) {
+    public String getModernTitle(Player player) {
         return Lobby.instance.getConfig().getString("scoreboard.title");
     }
 
     @Override
-    public List<String> getLines(Player player) {
+    public List<String> getModernLines(Player player) {
 
         List<String> lines = new ArrayList<String>();
 
